@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <parameters>
+        <parameter key="afe_translation_tool.example.class">Afe\TranslationToolBundle\Example</parameter>
+    </parameters>
+    -->
+
+    <services>
+        <service id="yml_check_translation_code" class="Afe\TranslationToolBundle\Service\YmlCheckTranslationCode">
+            <argument type="service" id="translation_files_service" />
+            <!--<argument>plain_value</argument>-->
+            <!--<argument>%parameter_name%</argument>-->
+        </service>
+        <service id="translation_files_service" class="Afe\TranslationToolBundle\Service\TranslationFilesService">
+        </service>
+    </services>
+</container>

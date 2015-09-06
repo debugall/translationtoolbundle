@@ -1,0 +1,1 @@
+translations files must me located in "translations" directory

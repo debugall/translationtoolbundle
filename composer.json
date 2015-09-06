@@ -1,0 +1,30 @@
+{
+  "name" : "Afe/TranslationToolBundle",
+  "description" : "Check for duplicated translations code, unused translations codes, ...",
+  "type" : "symfony-bundle",
+  "authors" : [{
+    "name" : "Faye",
+    "email" : "amadyfaye1@gmail.com"
+  }],
+  "keywords" : [
+    "unsused duplicated translation"
+  ],
+  "license" : [
+    "MIT"
+  ],
+  "require" : {
+  },
+  "autoload" : {
+    "psr-0" : {
+      "translationtoolbundle" : ""
+    }
+  },
+  "target-dir" : "translationtoolbundle",
+  "repositories" : [{
+  }],
+  "extra" : {
+    "branch-alias" : {
+      "dev-master" : "dev"
+    }
+  }
+}

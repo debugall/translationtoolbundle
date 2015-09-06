@@ -28,14 +28,14 @@ class UnusedTranslationCodeCommand extends ContainerAwareCommand {
         /** @var YmlCheckTranslationCode $ymlCheckTranslationCode */
         $ymlCheckTranslationCode = $container->get('yml_check_translation_code');
 
-        $duplicatedTranslationsCode = $ymlCheckTranslationCode->runCheckUnusedTranslationsCode();
-//        $output->writeln("=================================================================");
-//        $output->writeln("=================== UNUSED TRANSLATIONS KEYS ====================");
-//        $output->writeln("=================================================================");
-//        $output->writeln("====== ".count($duplicatedTranslationsCode)." unused translations code found");
-//        foreach ($duplicatedTranslationsCode as $duplicatedCode) {
-//            $output->writeln($duplicatedCode);
-//        }
+        $unusedTranslationsCode = $ymlCheckTranslationCode->runCheckUnusedTranslationsCode();
+        $output->writeln("=================================================================");
+        $output->writeln("=================== UNUSED TRANSLATIONS KEYS ====================");
+        $output->writeln("=================================================================");
+        $output->writeln("====== ".$unusedTranslationsCode->unusedCodesNumber." unused translations code found");
+        foreach ($unusedTranslationsCode->unusedCodes as $duplicatedCode) {
+            $output->writeln($duplicatedCode);
+        }
         $output->writeln((new \DateTime())->format('d/m/Y H:i:s'));
     }
 

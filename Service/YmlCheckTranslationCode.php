@@ -10,6 +10,7 @@ namespace Afe\TranslationToolBundle\Service;
 
 
 use Afe\TranslationToolBundle\DTO\DuplicatedTranslationDTO;
+use Afe\TranslationToolBundle\DTO\UnusedTranslationDTO;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Yaml\Parser;
@@ -44,7 +45,7 @@ class YmlCheckTranslationCode implements CheckTranslationCodeInterface {
 
     /**
      *
-     * @return
+     * @return UnusedTranslationDTO
      */
     public function runCheckUnusedTranslationsCode()
     {
@@ -53,16 +54,16 @@ class YmlCheckTranslationCode implements CheckTranslationCodeInterface {
         $translationsCodes = $this->translationFilesService->getAllTranslationCode();
 
         foreach ($translationsCodes as $translationCode) {
-            $stopwatch = new Stopwatch();
-            $stopwatch->start($translationCode);
+//            $stopwatch = new Stopwatch();
+//            $stopwatch->start($translationCode);
             $finder = $this->translationFilesService->getSrcDirFinder();
-            if($finder->contains($translationCode)->count() == 0){
+            if ($finder->contains($translationCode)->count() == 0) {
                 var_dump($translationCode);
                 $result[] = $translationCode;
             }
-            $stopwatch->stop($translationCode);
+//            $stopwatch->stop($translationCode);
         }
-        return $result;
+        return UnusedTranslationDTO::buildDTO($result, count($translationsCodes));
     }
 
     /**

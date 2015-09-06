@@ -8,7 +8,8 @@ Installation :
 
 Configuration :
 
-# config.yml
+```
+\# config.yml
 afe_translation_tool:
     translation_files_dir_path: "%kernel.root_dir%/.." # translation files root directory
     src_dir_path: "%kernel.root_dir%/.." # src root directory
@@ -16,11 +17,12 @@ afe_translation_tool:
     translation_files_locale: fr #
     translation_files_format: yml # translation file format (only yml is currently supported)
     exclude_vendor_directory: true # exclude vendor translation files default false
+```
 
 Usage :
 
-# display duplicated translations code
+\# display duplicated translations code
 php app/console afe:translation:check:codes
 
-# display unused translations code
+\# display unused translations code
 php app/console afe:translation:unused:codes

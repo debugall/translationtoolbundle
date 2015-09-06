@@ -21,8 +21,10 @@ afe_translation_tool:
 
 Usage :
 
+```
 \# display duplicated translations code
 php app/console afe:translation:check:codes
 
 \# display unused translations code
 php app/console afe:translation:unused:codes
+```

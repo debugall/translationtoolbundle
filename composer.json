@@ -2,6 +2,7 @@
   "name": "afe/translation-tool-bundle",
   "description": "Check for duplicated translations code, unused translations codes, ...",
   "type": "symfony-bundle",
+  "homepage":    "https://github.com/debugall/translationtoolbundle",
   "authors": [
     {
       "name": "Faye",
@@ -24,13 +25,4 @@
     }
   },
   "target-dir": "translationtoolbundle",
-  "repositories": [
-    {
-    }
-  ],
-  "extra": {
-    "branch-alias": {
-      "master": "master"
-    }
-  }
 }

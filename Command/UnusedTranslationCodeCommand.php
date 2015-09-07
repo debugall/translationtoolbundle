@@ -32,8 +32,9 @@ class UnusedTranslationCodeCommand extends ContainerAwareCommand {
         $output->writeln("=================================================================");
         $output->writeln("=================== UNUSED TRANSLATIONS KEYS ====================");
         $output->writeln("=================================================================");
+        $output->writeln("====== ".$unusedTranslationsCode->analyzedCodesNumber." translations code analyzed");
         $output->writeln("====== ".$unusedTranslationsCode->unusedCodesNumber." unused translations code found");
-        foreach ($unusedTranslationsCode->unusedCodes as $duplicatedCode) {
+        foreach ($unusedTranslationsCode->unusedCodes as $key=>$duplicatedCode) {
             $output->writeln($duplicatedCode);
         }
         $output->writeln((new \DateTime())->format('d/m/Y H:i:s'));

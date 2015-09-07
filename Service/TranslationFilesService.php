@@ -24,6 +24,9 @@ class TranslationFilesService  {
     private $locale;
     private $excludeVendorDirectory;
     private $formatToLookInto;
+    private $excludedTranslationFileMask;
+    private $excludedFileMask;
+    private $excludedDirectories;
 
     public function getAllTranslationCode()
     {
@@ -73,12 +76,21 @@ class TranslationFilesService  {
         return $result;
     }
 
+    /**
+     * @return Finder
+     */
     public function getSrcDirFinder()
     {
         $finder = new Finder();
         $finder = $finder->in($this->srcDirPath)->exclude("cache")->exclude("logs")->exclude("config");
         foreach ($this->formatToLookInto as $fileFormat) {
             $finder->name("*.".$fileFormat);
+        }
+        foreach ($this->excludedDirectories as $dir) {
+            $finder->exclude($dir);
+        }
+        foreach ($this->excludedFileMask as $mask) {
+            $finder->notName($mask);
         }
         $finder->files();
         return $finder;
@@ -108,7 +120,9 @@ class TranslationFilesService  {
 
             $finder = new Finder();
             $finder->name("*." . $this->locale. "." .$this->format)->in($dir->getRealpath())->files();
-
+            foreach ($this->excludedTranslationFileMask as $mask) {
+                $finder->notName($mask);
+            }
             foreach ($finder as $file) {
                 $result[] = $file->getRealpath();
             }
@@ -187,6 +201,18 @@ class TranslationFilesService  {
     public function setFormatToLookInto($formatToLookInto)
     {
         $this->formatToLookInto = $formatToLookInto;
+    }
+    public function setExcludedTranslationFileMask($excludedTranslationFileMask)
+    {
+        $this->excludedTranslationFileMask = $excludedTranslationFileMask;
+    }
+    public function setExcludedFileMask($excludedFileMask)
+    {
+        $this->excludedFileMask = $excludedFileMask;
+    }
+    public function setExcludedDirectories($excludedDirectories)
+    {
+        $this->excludedDirectories = $excludedDirectories;
     }
 
 

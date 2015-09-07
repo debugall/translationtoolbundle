@@ -15,7 +15,7 @@ class CheckTranslationCodeCommand extends ContainerAwareCommand {
     protected function configure()
     {
         $this
-            ->setName('afe:translation:check:codes')
+            ->setName(' ')
             ->setDescription('check if any translations code is duplicated');
     }
 

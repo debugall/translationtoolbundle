@@ -31,6 +31,9 @@ class AfeTranslationToolExtension extends Extension
         $srcDirPath             = $config['src_dir_path'];
         $excludeVendorDirectory = $config['exclude_vendor_directory'];
         $formatToLookInto = $config['format_to_look_into'];
+        $excludedTranslationFileMask = $config['excluded_translation_file_mask'];
+        $excludedFileMask = $config['excluded_file_mask'];
+        $excludedDirectories = $config['excluded_directories'];
 
         if ($format == 'yml') {
             // Once the services definition are read, get your service and add a method call to setConfig()
@@ -41,6 +44,9 @@ class AfeTranslationToolExtension extends Extension
             $serviceDefintion->addMethodCall('setExcludeVendor', array($excludeVendorDirectory));
             $serviceDefintion->addMethodCall('setSrcDirPath', array($srcDirPath));
             $serviceDefintion->addMethodCall('setFormatToLookInto', array($formatToLookInto));
+            $serviceDefintion->addMethodCall('setExcludedTranslationFileMask', array($excludedTranslationFileMask));
+            $serviceDefintion->addMethodCall('setExcludedFileMask', array($excludedFileMask));
+            $serviceDefintion->addMethodCall('setExcludedDirectories', array($excludedDirectories));
         } else {
             throw new \Exception('unknown format ' . $format);
         }

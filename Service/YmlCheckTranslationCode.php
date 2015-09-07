@@ -49,26 +49,21 @@ class YmlCheckTranslationCode implements CheckTranslationCodeInterface {
      */
     public function runCheckUnusedTranslationsCode()
     {
-        $result = [];
         //retrieve array of array of translation code
-//        $stopwatch = new Stopwatch();
-//        $w = $stopwatch->start("getallcodes");
         $translationsCodes = $this->translationFilesService->getAllTranslationCode();
-//        $stopwatch->stop("getallcodes");
-//        var_dump("getallcodes ".$w->getDuration()/1000);
+        $translationsCodesNumber = count($translationsCodes);
+        $result = $translationsCodes;
 
-        foreach ($translationsCodes as $translationCode) {
-//            $stopwatch = new Stopwatch();
-//            $w = $stopwatch->start($translationCode);
-            $finder = $this->translationFilesService->getSrcDirFinder();
-            if ($finder->contains($translationCode)->count() == 0) {
-//                var_dump($translationCode);
-                $result[] = $translationCode;
+        $finder = $this->translationFilesService->getSrcDirFinder();
+        foreach ($finder as $file) {
+            $content = file_get_contents($file->getRealpath());
+            foreach ($translationsCodes as $index => $translationCode) {
+                if (strpos($content ,$translationCode) != false) {
+                    unset($result[$index]);
+                }
             }
-//            $stopwatch->stop($translationCode);
-//            var_dump($w->getDuration()/1000);
         }
-        return UnusedTranslationDTO::buildDTO($result, count($translationsCodes));
+        return UnusedTranslationDTO::buildDTO($result, $translationsCodesNumber);
     }
 
     /**

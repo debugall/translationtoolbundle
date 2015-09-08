@@ -110,7 +110,7 @@ class TranslationFilesService  {
         $result = [];
         $resourcesDirFinder = new Finder();
         $resourcesDirFinder->directories()->name('translations')->in($this->translationFilesDirPath)
-            ->exclude("cache")->exclude("logs")->exclude("config")
+            ->exclude("cache")->exclude("logs")
         ;
         if ($this->excludeVendorDirectory) {
             $resourcesDirFinder->exclude("vendor");
@@ -217,4 +217,4 @@ class TranslationFilesService  {
 
 
 
-} 
+}

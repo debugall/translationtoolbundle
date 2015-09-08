@@ -82,7 +82,7 @@ class TranslationFilesService  {
     public function getSrcDirFinder()
     {
         $finder = new Finder();
-        $finder = $finder->in($this->srcDirPath)->exclude("cache")->exclude("logs")->exclude("config");
+        $finder = $finder->in($this->srcDirPath)->exclude("cache")->exclude("logs");
         foreach ($this->formatToLookInto as $fileFormat) {
             $finder->name("*.".$fileFormat);
         }

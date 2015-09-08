@@ -7,7 +7,7 @@ This bundle provide a set of tool to :
 ```
 composer require afe/translation-tool-bundle:dev-master
 ```
- 
+
 ```
 // AppKernel.php
 public function registerBundles()
@@ -32,7 +32,7 @@ afe_translation_tool:
     translation_files_locale: fr # locale of translations files to process
     translation_files_format: yml # translation files format to process (only yml is currently supported)
     excluded_translation_file_mask: ["dtc_*"] # excluded translations files from process
-    exclude_vendor_directory: true # exclude vendor translation files. Default true
+    excluded_translation_directories: ["vendor"] # exclude translation files of this directory
 
     # processed directory configuration
     src_dir_path: "%kernel.root_dir%/.." # src root directory

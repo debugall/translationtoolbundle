@@ -29,7 +29,7 @@ class AfeTranslationToolExtension extends Extension
         $locale                 = $config['translation_files_locale'];
         $translationFilesDirPath             = $config['translation_files_dir_path'];
         $srcDirPath             = $config['src_dir_path'];
-        $excludeVendorDirectory = $config['exclude_vendor_directory'];
+        $excludeVendorDirectory = $config['excluded_translation_directories'];
         $formatToLookInto = $config['format_to_look_into'];
         $excludedTranslationFileMask = $config['excluded_translation_file_mask'];
         $excludedFileMask = $config['excluded_file_mask'];

@@ -56,8 +56,10 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('translation_files_locale')
                     ->cannotBeEmpty()
                 ->end()
-                ->scalarNode('exclude_vendor_directory')
-                    ->defaultTrue()
+                ->arrayNode('excluded_translation_directories')
+                    ->prototype('scalar')
+                    ->end()
+                    ->cannotBeEmpty()
                 ->end()
         ;
 

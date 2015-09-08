@@ -112,8 +112,8 @@ class TranslationFilesService  {
         $resourcesDirFinder->directories()->name('translations')->in($this->translationFilesDirPath)
             ->exclude("cache")->exclude("logs")
         ;
-        if ($this->excludeVendorDirectory) {
-            $resourcesDirFinder->exclude("vendor");
+        foreach($this->excludeVendorDirectory as $dir) {
+            $resourcesDirFinder->exclude($dir);
         }
 
         foreach ($resourcesDirFinder as $dir) {

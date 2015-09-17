@@ -1,4 +1,4 @@
-This bundle provide a set of tool to :
+This bundle provide a set of tools to :
 - Find unused translations code
 - Find duplicated translations code
 

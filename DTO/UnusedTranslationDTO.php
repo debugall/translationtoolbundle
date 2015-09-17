@@ -10,16 +10,24 @@ namespace Afe\TranslationToolBundle\DTO;
  */
 class UnusedTranslationDTO
 {
+    /**
+     * @var TranslationCodeElement[]
+     */
     public $unusedCodes;
     public $unusedCodesNumber;
     public $analyzedCodesNumber;
 
-    public static function buildDTO($unusedCodes, $analyzedCodesNumber)
+    /**
+     * @param TranslationCodeElement[] $unusedCodes
+     * @param $analyzedCodesNumber
+     * @return DuplicatedTranslationDTO
+     */
+    public static function buildDTO(array $unusedCodes, $analyzedCodesNumber, $unusedCodesNumber)
     {
         $dto = new DuplicatedTranslationDTO();
         $dto->analyzedCodesNumber = $analyzedCodesNumber;
         $dto->unusedCodes = $unusedCodes;
-        $dto->unusedCodesNumber = count($unusedCodes);
+        $dto->unusedCodesNumber = $unusedCodesNumber;
         return $dto;
 
     }

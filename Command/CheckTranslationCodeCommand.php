@@ -29,6 +29,8 @@ class CheckTranslationCodeCommand extends ContainerAwareCommand {
 
         $duplicatedTranslationDTO = $ymlCheckTranslationCode->runCheckDuplicatedTranslationsCode();
         $output->writeln("=================================================================");
+        $output->writeln("=================================================================");
+        $output->writeln("=================================================================");
         $output->writeln("================= DUPLICATED TRANSLATIONS KEYS ==================");
         $output->writeln("=================================================================");
         $output->writeln("====== ".$duplicatedTranslationDTO->analyzedCodesNumber." translations code analyzed");

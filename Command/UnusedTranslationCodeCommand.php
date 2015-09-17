@@ -29,13 +29,18 @@ class UnusedTranslationCodeCommand extends ContainerAwareCommand {
         $ymlCheckTranslationCode = $container->get('yml_check_translation_code');
 
         $unusedTranslationsCode = $ymlCheckTranslationCode->runCheckUnusedTranslationsCode();
-        $output->writeln("=================================================================");
-        $output->writeln("=================== UNUSED TRANSLATIONS KEYS ====================");
-        $output->writeln("=================================================================");
+        $output->writeln("===========================================================================");
+        $output->writeln("===========================================================================");
+        $output->writeln("===========================================================================");
+        $output->writeln("======================== UNUSED TRANSLATIONS KEYS =========================");
+        $output->writeln("===========================================================================");
         $output->writeln("====== ".$unusedTranslationsCode->analyzedCodesNumber." translations code analyzed");
-        $output->writeln("====== ".$unusedTranslationsCode->unusedCodesNumber." unused translations code found");
-        foreach ($unusedTranslationsCode->unusedCodes as $key=>$duplicatedCode) {
-            $output->writeln($duplicatedCode);
+        $output->writeln("====== ".$unusedTranslationsCode->unusedCodesNumber." unused translations code found in ".count($unusedTranslationsCode->unusedCodes). " files");
+        foreach ($unusedTranslationsCode->unusedCodes as $filePath => $translationCodeElements) {
+            $output->writeln("\n************ FILE : ".$filePath." (". count($translationCodeElements)." unused codes)");
+            foreach ($translationCodeElements as $translationCodeElement) {
+                $output->writeln($translationCodeElement->translationCode);
+            }
         }
         $output->writeln((new \DateTime())->format('d/m/Y H:i:s'));
     }

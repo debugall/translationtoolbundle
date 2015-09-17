@@ -9,6 +9,7 @@
 namespace Afe\TranslationToolBundle\Service;
 
 
+use Afe\TranslationToolBundle\DTO\TranslationCodeElement;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
@@ -38,6 +39,28 @@ class TranslationFilesService  {
         //get translations code (one array of translations code for each file)
         $translationsCode = $this->getTranslationsCodesArray($translationsFilesArray);
         return $translationsCode;
+    }
+
+    /**
+     * @return TranslationCodeElement[]
+     */
+    public function getAllTranslationCodeElement()
+    {
+        $result = [];
+
+        $translationsFilesPath = $this->getTranslationFilesPath();
+
+        //get an array of array (one array for each file)
+        $translationsFilesArray = $this->filesToArray($translationsFilesPath);
+
+        //get translations code (one array of translations code for each file)
+        foreach ($translationsFilesArray as $filePath => $translationFileArray) {
+            $translationsCode = $this->getTranslationsCodesArrayByFile($translationFileArray);
+            foreach ($translationsCode as $code) {
+                $result[] = TranslationCodeElement::buildUI($code, $filePath);
+            }
+        }
+        return $result;
     }
 
     /**
@@ -71,6 +94,17 @@ class TranslationFilesService  {
                 foreach ($translationFileArray as $code => $values) {
                     $this->concatKeys($code, $values, $result);
                 }
+            }
+        }
+        return $result;
+    }
+
+    public function getTranslationsCodesArrayByFile($translationFileArray)
+    {
+        $result = [];
+        if(is_array($translationFileArray)) {
+            foreach ($translationFileArray as $code => $values) {
+                $this->concatKeys($code, $values, $result);
             }
         }
         return $result;
@@ -141,7 +175,7 @@ class TranslationFilesService  {
         foreach ($translationsFilesPath as $filePath) {
             //every node in yml files correspond to a key in the returned array
             $array = $this->fileToArray($filePath);
-            $result[] = $array;
+            $result[$filePath] = $array;
         }
         return $result;
     }

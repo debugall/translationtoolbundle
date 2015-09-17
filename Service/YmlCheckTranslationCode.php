@@ -50,20 +50,35 @@ class YmlCheckTranslationCode implements CheckTranslationCodeInterface {
     public function runCheckUnusedTranslationsCode()
     {
         //retrieve array of array of translation code
-        $translationsCodes = $this->translationFilesService->getAllTranslationCode();
-        $translationsCodesNumber = count($translationsCodes);
-        $result = $translationsCodes;
+        $translationsCodesElements = $this->translationFilesService->getAllTranslationCodeElement();
+        $translationsCodesNumber = count($translationsCodesElements);
+        $result = $translationsCodesElements;
 
         $finder = $this->translationFilesService->getSrcDirFinder();
         foreach ($finder as $file) {
             $content = file_get_contents($file->getRealpath());
-            foreach ($translationsCodes as $index => $translationCode) {
-                if (strpos($content ,$translationCode) != false) {
+
+            //we remove used translation from $result
+            foreach ($translationsCodesElements as $index => $translationCodeElement) {
+                //if the translation code is found we remove it from the result
+                if (strpos($content ,$translationCodeElement->translationCode) != false) {
                     unset($result[$index]);
                 }
             }
         }
-        return UnusedTranslationDTO::buildDTO($result, $translationsCodesNumber);
+
+        $unusedCodesNumber = count($result);
+
+        //we group element by filePath
+        $resultGrouped = [];
+        foreach ($result as $translationCodeElement) {
+            if (!isset($resultGrouped[$translationCodeElement->fileName])) {
+                $resultGrouped[$translationCodeElement->fileName] = [];
+            }
+            $resultGrouped[$translationCodeElement->fileName][] = $translationCodeElement;
+        }
+
+        return UnusedTranslationDTO::buildDTO($resultGrouped, $translationsCodesNumber, $unusedCodesNumber);
     }
 
     /**
